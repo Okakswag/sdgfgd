@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ valute.Name }} ({{ valute.CharCode }})</title>
+</head>
+<body>
+    <p><a href="/">&larr; Назад к списку валют</a></p>
+    <hr>
+
+    <h1>{{ valute.Name }} ({{ valute.CharCode }})</h1>
+    
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <td><b>Буквенный код</b></td>
+            <td>{{ valute.CharCode }}</td>
+        </tr>
+        <tr>
+            <td><b>Цифровой код</b></td>
+            <td>{{ valute.NumCode }}</td>
+        </tr>
+        <tr>
+            <td><b>Единиц валюты (номинал)</b></td>
+            <td>{{ valute.Nominal }}</td>
+        </tr>
+        <tr>
+            <td><b>Курс ЦБ РФ</b></td>
+            <td><b>{{ valute.ValueFormatted }} руб.</b></td>
+        </tr>
+        <tr>
+            <td><b>Предыдущий курс</b></td>
+            <td>{{ valute.PreviousFormatted }} руб.</td>
+        </tr>
+        <tr>
+            <td><b>Изменение курса</b></td>
+            <td>{{ valute.DiffFormatted }} руб.</td>
+        </tr>
+        <tr>
+            <td><b>Курс в долларах США (USD)</b></td>
+            <td>${{ valute.PriceUsd }}</td>
+        </tr>
+        <tr>
+            <td><b>Курс в евро (EUR)</b></td>
+            <td>{{ valute.PriceEur }} €</td>
+        </tr>
+    </table>
+
+    <br>
+    <h3>Калькулятор</h3>
+    <form action="/currency/{{ valute.CharCode }}" method="get">
+        <label for="amount">Количество:</label>
+        <input type="number" id="amount" name="amount" value="{{ amount }}" step="any" required>
+        <button type="submit">Рассчитать</button>
+    </form>
+
+    <h4>Итого для {{ amount }} {{ valute.CharCode }}:</h4>
+    <ul>
+        <li>В рублях: <b>{{ total_rub }} руб.</b></li>
+        <li>В долларах США: <b>${{ total_usd }}</b></li>
+        <li>В евро: <b>{{ total_eur }} €</b></li>
+    </ul>
+
+    <hr>
+    <p><a href="/">&larr; Назад к списку валют</a></p>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Курсы валют ЦБ РФ</title>
+</head>
+<body>
+    <h1>Курсы валют ЦБ РФ на {{ date_str }}</h1>
+    <p>Доллар США $ — {{ usd.value }} руб. {{ usd.arrow }}</p>
+    <p>Евро € — {{ eur.value }} руб. {{ eur.arrow }}</p>
+    <p>Последнее обновление базы данных: {{ timestamp_str }}</p>
+    <p><a href="/">Обновить страницу</a></p>
+    <hr>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr bgcolor="#f0f0f0">
+                <th>Цифр. код</th>
+                <th>Букв. код</th>
+                <th>Единиц</th>
+                <th>Валюта</th>
+                <th>Курс</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for v in valutes %}
+            <tr>
+                <td>{{ v.NumCode }}</td>
+                <td><a href="/currency/{{ v.CharCode }}"><b>{{ v.CharCode }}</b></a></td>
+                <td>{{ v.Nominal }}</td>
+                <td><a href="/currency/{{ v.CharCode }}">{{ v.Name }}</a></td>
+                <td>{{ v.ValueFormatted }} ({{ v.ChangeFormatted }})</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
